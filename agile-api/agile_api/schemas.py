@@ -6,8 +6,10 @@ class ValueBase(BaseModel):
     title: str
     description: Optional[str] = None
 
+
 class ValueCreate(ValueBase):
     pass
+
 
 class Value(ValueBase):
     id: int
@@ -15,12 +17,15 @@ class Value(ValueBase):
     class Config:
         orm_mode = True
 
+
 class PrincipleBase(BaseModel):
     title: str
     description: Optional[str] = None
 
+
 class PrincipleCreate(PrincipleBase):
     pass
+
 
 class Principle(PrincipleBase):
     id: int
