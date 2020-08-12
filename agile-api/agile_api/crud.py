@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
 
-import models, schemas
+try:
+    from . import models, schemas
+except ImportError:
+    import models, schemas
 
 def get_value(db: Session, value_id: int):
     return db.query(models.Value).filter(models.Value.id == value_id).first()

@@ -1,5 +1,10 @@
 from sqlalchemy import Column, Integer, String, Text
-from database import Base
+
+try:
+    from agile_api.database import Base
+except ImportError:
+    from database import Base
+
 
 class Value(Base):
     __tablename__ = "values"

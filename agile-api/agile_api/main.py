@@ -3,8 +3,12 @@ from typing import List
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-import crud, models, schemas
-from database import SessionLocal, engine
+try:
+    from . import crud, models, schemas
+    from agile_api.database import SessionLocal, engine
+except ImportError:
+    import crud, models, schemas
+    from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -16,6 +20,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+@app.get("/")
+def read_main():
+    return {"msg": "Welcome to Agile API"}
 
 @app.post("/values/", response_model=schemas.Value)
 def create_value(value: schemas.ValueCreate, db: Session = Depends(get_db)):
